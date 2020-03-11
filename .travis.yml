@@ -4,5 +4,6 @@ services: docker
 
 script:
     - docker build . -t  liupeng0518/jdk:1.5.6.1-with-docker-cli
+    - docker run liupeng0518/jdk:1.5.6.1-with-docker-cli docker version
 after_success:
     - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push liupeng0518/jdk:1.5.6.1-with-docker-cli
