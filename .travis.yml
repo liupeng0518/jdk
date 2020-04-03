@@ -3,7 +3,13 @@ sudo: required
 services: docker
 
 script:
-    - docker build . -t  liupeng0518/jdk:1.5.6.1-with-docker-cli
-    - docker run liupeng0518/jdk:1.5.6.1-with-docker-cli docker version
+  - docker pull gcr.io/kubebuilder/kube-rbac-proxy:v0.4.1 && docker tag gcr.io/kubebuilder/kube-rbac-proxy:v0.4.1 liupeng0518/gcr.io_kubebuilder_kube-rbac-proxy:v0.4.1
+  - docker pull us.gcr.io/k8s-artifacts-prod/cluster-api/kubeadm-bootstrap-controller:v0.3.3 && docker tag us.gcr.io/k8s-artifacts-prod/cluster-api/kubeadm-bootstrap-controller:v0.3.3 liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-bootstrap-controller:v0.3.3
+  - docker pull us.gcr.io/k8s-artifacts-prod/cluster-api/kubeadm-control-plane-controller:v0.3.3 && docker tag us.gcr.io/k8s-artifacts-prod/cluster-api/kubeadm-control-plane-controller:v0.3.3 liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-control-plane-controller:v0.3.3
+  - docker pull us.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller:v0.3.3 && docker tag us.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller:v0.3.3 liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_cluster-api-controller:v0.3.3
 after_success:
-    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push liupeng0518/jdk:1.5.6.1-with-docker-cli
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push liupeng0518/gcr.io_kubebuilder_kube-rbac-proxy:v0.4.1
+  - docekr push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-bootstrap-controller:v0.3.3
+  - docker push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-control-plane-controller:v0.3.3
+  - docker push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_cluster-api-controller:v0.3.3
