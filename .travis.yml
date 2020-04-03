@@ -10,6 +10,6 @@ script:
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker push liupeng0518/gcr.io_kubebuilder_kube-rbac-proxy:v0.4.1
-  - docekr push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-bootstrap-controller:v0.3.3
+  - docker push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-bootstrap-controller:v0.3.3
   - docker push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-control-plane-controller:v0.3.3
   - docker push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_cluster-api-controller:v0.3.3
