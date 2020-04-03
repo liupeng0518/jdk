@@ -3,6 +3,7 @@ sudo: required
 services: docker
 
 script:
+  - docker pull gcr.io/kubebuilder/kube-rbac-proxy:v0.4.0 && docker tag gcr.io/kubebuilder/kube-rbac-proxy:v0.4.0 liupeng0518/gcr.io_kubebuilder_kube-rbac-proxy:v0.4.0
   - docker pull gcr.io/kubebuilder/kube-rbac-proxy:v0.4.1 && docker tag gcr.io/kubebuilder/kube-rbac-proxy:v0.4.1 liupeng0518/gcr.io_kubebuilder_kube-rbac-proxy:v0.4.1
   - docker pull us.gcr.io/k8s-artifacts-prod/cluster-api/kubeadm-bootstrap-controller:v0.3.3 && docker tag us.gcr.io/k8s-artifacts-prod/cluster-api/kubeadm-bootstrap-controller:v0.3.3 liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-bootstrap-controller:v0.3.3
   - docker pull us.gcr.io/k8s-artifacts-prod/cluster-api/kubeadm-control-plane-controller:v0.3.3 && docker tag us.gcr.io/k8s-artifacts-prod/cluster-api/kubeadm-control-plane-controller:v0.3.3 liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-control-plane-controller:v0.3.3
@@ -10,6 +11,7 @@ script:
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker push liupeng0518/gcr.io_kubebuilder_kube-rbac-proxy:v0.4.1
+  - docker push liupeng0518/gcr.io_kubebuilder_kube-rbac-proxy:v0.4.0
   - docker push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-bootstrap-controller:v0.3.3
   - docker push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_kubeadm-control-plane-controller:v0.3.3
   - docker push liupeng0518/us.gcr.io_k8s-artifacts-prod_cluster-api_cluster-api-controller:v0.3.3
