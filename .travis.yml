@@ -1,7 +1,8 @@
 language: bash
 sudo: required
 services: docker
-
+arch:
+  - arm64
 script:
   - docker build . -t liupeng0518/k8s-helm-arm64:v2.16.7
 after_success:
