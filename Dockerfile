@@ -14,8 +14,7 @@ RUN curl -o go1.14.4.linux-amd64.tar.gz  https://dl.google.com/go/go1.14.4.linux
     rm -rf go1.14.4.linux-amd64.tar.gz
 USER coder
 
-RUN /usr/bin/code-server --install-extension \
-&& /usr/bin/code-server --install-extension ms-ceintl.vscode-language-pack-zh-hans \
+RUN /usr/bin/code-server --install-extension ms-ceintl.vscode-language-pack-zh-hans \
 && /usr/bin/code-server --install-extension formulahendry.code-runner \
 && /usr/bin/code-server --install-extension golang.go \
 && /usr/bin/code-server --install-extension searking.preview-vscode \
