@@ -14,19 +14,22 @@ RUN curl -o go1.14.4.linux-amd64.tar.gz  https://dl.google.com/go/go1.14.4.linux
     rm -rf go1.14.4.linux-amd64.tar.gz
 USER coder
 
-RUN /usr/bin/code-server --install-extension ms-ceintl.vscode-language-pack-zh-hans \
-&& /usr/bin/code-server --install-extension formulahendry.code-runner \
-&& /usr/bin/code-server --install-extension golang.go \
-&& /usr/bin/code-server --install-extension searking.preview-vscode \
-&& /usr/bin/code-server --install-extension ms-vscode-remote.remote-ssh \
-&& /usr/bin/code-server --install-extension formulahendry.terminal \
-&& /usr/bin/code-server --install-extension bajdzis.vscode-database \
-&& /usr/bin/code-server --install-extension hookyqr.beautify \
-&& /usr/bin/code-server --install-extension donjayamanne.githistory \
-&& /usr/bin/code-server --install-extension eamodio.gitlens \
-&& /usr/bin/code-server --install-extension ms-python.python \
-&& /usr/bin/code-server --install-extension vscjava.vscode-java-pack \
-&& /usr/bin/code-server --install-extension swellaby.node-pack \
-&& /usr/bin/code-server --install-extension rebornix.ruby \
-&& /usr/bin/code-server --install-extension ms-azuretools.vscode-docker \
-&& /usr/bin/code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
+RUN for i in ms-ceintl.vscode-language-pack-zh-hans \
+        formulahendry.code-runner \
+        golang.go \
+        searking.preview-vscode \
+        ms-vscode-remote.remote-ssh \
+        formulahendry.terminal \
+        bajdzis.vscode-database \
+        hookyqr.beautify \
+        donjayamanne.githistory \
+        eamodio.gitlens \
+        ms-python.python \
+        vscjava.vscode-java-pack \
+        swellaby.node-pack \
+        rebornix.ruby \
+        ms-azuretools.vscode-docker \
+        ms-kubernetes-tools.vscode-kubernetes-tools;
+    do
+       /usr/bin/code-server --install-extension $i;
+    done
