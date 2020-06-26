@@ -29,7 +29,4 @@ RUN for i in ms-ceintl.vscode-language-pack-zh-hans \
         swellaby.node-pack \
         rebornix.ruby \
         ms-azuretools.vscode-docker \
-        ms-kubernetes-tools.vscode-kubernetes-tools;
-    do
-       /usr/bin/code-server --install-extension $i;
-    done
+        ms-kubernetes-tools.vscode-kubernetes-tools;do /usr/bin/code-server --install-extension "$i"; done
