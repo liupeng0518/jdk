@@ -4,7 +4,7 @@ services: docker
 arch:
   - arm64
 script:
-  - docker build . -t liupeng0518/k8s-helm-arm64:v2.16.7
+  - docker build . -t liupeng0518/code-server-aio:3.4.1
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push liupeng0518/k8s-helm-arm64:v2.16.7
+  - docker push liupeng0518/code-server-aio:3.4.1
