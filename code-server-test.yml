@@ -1,0 +1,79 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: code-server-inspur
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-server
+  namespace: code-server-inspur
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: NodePort
+  selector:
+    app: code-server
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: code-server
+  name: code-server
+  namespace: code-server-inspur
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-server
+  template:
+    metadata:
+      labels:
+        app: code-server
+    spec:
+      nodeName: node4
+      containers:
+        - image: liupeng0518/code-server-aio:3.4.1.1
+          imagePullPolicy: IfNotPresent
+          name: code-server
+          env:
+            - name: GIT_USER_EMAL
+              value: "liupeng04@inspur.com"
+            - name: GIT_USER
+              value: "jenn7prmqf"
+            - name: GIT_TOKEN
+              value: "1qaz@WSX"
+            - name: GIT_ADDRESS
+              value: "gitlab.example.choerodon.io/operation-code/tomcat"
+            - name: GIT_ASKPASS
+              value: "/tmp/.git-askpass"
+          ports:
+            - containerPort: 8080
+
+          volumeMounts:
+            - name: code-data
+              mountPath: /home/coder/project
+      volumes:
+        - name: code-data
+          persistentVolumeClaim:
+            claimName: code-data-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: code-server-inspur
+  name: code-data-pv-claim
+  labels:
+    app: code-server
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: nfs-provisioner
