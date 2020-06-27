@@ -14,7 +14,8 @@ RUN curl -o go1.14.4.linux-amd64.tar.gz  https://dl.google.com/go/go1.14.4.linux
   rm -rf go1.14.4.linux-amd64.tar.gz
 
 COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh \
+  && chown -R coder.coder /usr/local/bin/entrypoint.sh
 
 USER coder
 
