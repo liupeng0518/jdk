@@ -38,7 +38,7 @@ spec:
     spec:
       nodeName: node4
       containers:
-        - image: liupeng0518/code-server-aio:3.4.1.1
+        - image: liupeng0518/code-server-aio:3.4.1.2
           imagePullPolicy: IfNotPresent
           name: code-server
           env:
@@ -52,6 +52,8 @@ spec:
               value: "gitlab.example.choerodon.io/operation-code/tomcat"
             - name: GIT_ASKPASS
               value: "/tmp/.git-askpass"
+            - name: GIT_BRANCH
+              value: "master"
           ports:
             - containerPort: 8080
 
