@@ -31,6 +31,6 @@ RUN for i in ms-ceintl.vscode-language-pack-zh-hans \
   ms-azuretools.vscode-docker \
   ms-kubernetes-tools.vscode-kubernetes-tools;do /usr/bin/code-server --install-extension "$i"; done
 
-COPY entrypoint.sh /usr/local/bin/
-
-ENTRYPOINT [ "entrypoint.sh" ]
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
